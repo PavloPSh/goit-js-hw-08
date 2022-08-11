@@ -30,9 +30,8 @@ function inputCheck() {
         Object.entries(savedDataPars).forEach (([name, value]) => {
         inputObj[name] = value;
         formEl.elements[name].value = value;
-   });
-       
-};
+        });
+    };
 
 };
 
