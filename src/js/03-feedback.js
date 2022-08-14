@@ -26,7 +26,7 @@ function inputCheck() {
     const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     // const savedDataPars =JSON.parse(savedData);
     if(savedData){
-        savedDataPars = JSON.parse(savedData);
+        const savedDataPars = JSON.parse(savedData);
         Object.entries(savedDataPars).forEach (([name, value]) => {
         inputObj[name] = value;
         formEl.elements[name].value = value;
