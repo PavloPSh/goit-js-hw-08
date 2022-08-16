@@ -13,12 +13,12 @@ function onFormInput (event) {
     
     inputObj[event.target.name] = event.target.value;
     console.log('Current data:', inputObj)
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(inputObj))
-    
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(inputObj)) 
 };
 
 function onFormSubmit(event) {
     event.preventDefault();
+    console.log('On submit data:',JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)))
     event.currentTarget.reset()
     localStorage.removeItem(LOCAL_STORAGE_KEY);
 };
