@@ -1,8 +1,12 @@
 import throttle from "lodash.throttle";
+
+
 const formEl = document.querySelector('.feedback-form');
 
 formEl.addEventListener('input', throttle(onFormInput, 500) );
 formEl.addEventListener('submit', onFormSubmit);
+
+
 let inputObj = {};
 const LOCAL_STORAGE_KEY = "feedback-form-state";
 
@@ -13,11 +17,16 @@ function onFormInput (event) {
     
     inputObj[event.target.name] = event.target.value;
     console.log('Current data:', inputObj)
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(inputObj)) 
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(inputObj));
 };
 
 function onFormSubmit(event) {
     event.preventDefault();
+
+    if(formEl.elements.message.value === '' || formEl.elements.email.value === ''){
+        return alert('Please fill in all fields')
+    }
+
     console.log('On submit data:',JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)))
     event.currentTarget.reset()
     localStorage.removeItem(LOCAL_STORAGE_KEY);
@@ -25,12 +34,15 @@ function onFormSubmit(event) {
 
 function inputCheck() {
     const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+
     if(savedData){
         const savedDataPars = JSON.parse(savedData);
-        console.log('Local storage data:',savedDataPars)
+
+        console.log('Local storage data:',savedDataPars);
+
         Object.entries(savedDataPars).forEach (([name, value]) => {
-        inputObj[name] = value;
-        formEl.elements[name].value = value;
+            inputObj[name] = value;
+            formEl.elements[name].value = value;
         });
     };
 
